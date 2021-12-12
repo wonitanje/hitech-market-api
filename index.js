@@ -44,12 +44,12 @@ app.use('/', express.static(dist))
 app.use((req, res, next) => {
   console.log(req.url, req.method, !!req.session.isAuth)
 
-  if ((req.url === '/api/login' || req.body.secret === 'jusweeProd') && req.method === 'POST')
-    return next()
+  // if ((req.url === '/api/login' || req.body.secret === 'jusweeProd') && req.method === 'POST')
+  //   return next()
 
-  if (req.session.isAuth !== true) {
-    return res.redirect('/')
-  }
+  // if (req.session.isAuth !== true) {
+  //   return res.redirect('/')
+  // }
 
   next()
 })

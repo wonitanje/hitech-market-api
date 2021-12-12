@@ -7,7 +7,7 @@ const env = process.env
 const sequelize = new Sequelize(env.DATABASE_NAME, env.DATABASE_USERNAME, env.DATABASE_PASSWORD, {
   host: env.DATABASE_HOST,
   dialect: env.DATABASE_DIALECT,
-  logging: false
+  logging: false,
 })
 
 // fs.readdirSync(__dirname)
