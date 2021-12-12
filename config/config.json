@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "juswee",
+    "password": "passwd",
+    "database": "fefu-market",
+    "host": "0.0.0.0",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "juswee",
+    "password": "passwd",
+    "database": "fefu-market",
+    "host": "pgsql",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "juswee",
+    "password": "passwd",
+    "database": "fefu-market",
+    "host": "pgsql",
+    "dialect": "postgres"
+  }
+}
