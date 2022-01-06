@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  app:
+    build: .
+    image: hitech-market/api
+    container_name: hitech-market_api
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+    ports:
+      - "8248:${PORT}"
+    networks:
+      - hitech-market
+
+  mongodb:
+    image: mongo:latest
+    container_name: hitech-market_mongodb
+    hostname: "${HOSTNAME}_mongodb"
+    volumes:
+      - ./.docker/mongodb/mongod.conf:/etc/mongod.conf
+      - ./.docker/mongodb/data/db/:/data/db/
+      - ./.docker/mongodb/data/log/:/var/log/mongodb/
+    env_file:
+      - .env
+    ports:
+      - "${MONGO_PORT}:${MONGO_PORT}"
+    networks:
+      - hitech-market
+
+volumes:
+  app: null
+  mongodb:
+    driver: bridge
+
+networks:
+  hitech-market: null

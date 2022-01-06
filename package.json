@@ -1,0 +1,23 @@
+{
+  "name": "hitech-market",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node -r esm dist/app.js",
+    "serve": "nodemon -r esm src/app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "ip": "^1.1.5",
+    "mongoose": "^6.1.5",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
