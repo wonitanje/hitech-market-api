@@ -19,3 +19,7 @@ yarn
 yarn dev
 yarn start
 ```
+
+## Shutdown
+After using application follow `docker-compose down` to delete containers \
+Or `docker-compose stop` to stop containers 
