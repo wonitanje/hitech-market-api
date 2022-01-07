@@ -15,6 +15,7 @@ Run `yarn dev` or `npm run dev` to collect develop webpack bundle \
 Run `yarn start` or `npm start` to start server node.js app
 ```bash
 docker-compose up mongodb -d
+yarn
 yarn dev
 yarn start
 ```
