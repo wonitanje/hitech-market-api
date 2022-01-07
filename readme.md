@@ -1,12 +1,13 @@
 # Hitech Market API
 ## Run via docker-compose
+* Install [docker](https://docs.docker.com/get-docker/) and [docker-compose](https://docs.docker.com/compose/install/#install-compose) on machine
 ```bash
-docker-compose up --build
+docker-compose up --build -d
 ```
 
-## Run localy
-* You can't run localy without minimal docker-compose bundle
-* You must have node installed on your machine
+## Run locally
+* You can't run localy without minimal [docker](https://docs.docker.com/get-docker/) and [docker-compose](https://docs.docker.com/compose/install/#install-compose) bundle
+* You must have [node](https://nodejs.org/en/download/) installed on your machine
 
 Run `docker-compose up mongodb -d` to create database container \
 Run `yarn` or `npm install` to install dependencies \
