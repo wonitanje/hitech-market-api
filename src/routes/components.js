@@ -45,7 +45,7 @@ router.get('/:component', async (req, res) => {
 
   if (Stock[component] == null) return res.status(404).send('Комплектующий не найден')
 
-  const stock = await Stock[component].find({})
+  const stock = await Stock[component]?.find({})
 
   res.status(200).send(stock)
 })

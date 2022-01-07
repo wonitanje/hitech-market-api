@@ -3,10 +3,17 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node -r esm dist/app.js",
-    "serve": "nodemon -r esm src/app.js"
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "node dist/app.js",
+    "serve": "nodemon dist/index.js"
   },
   "dependencies": {
+    "@babel/cli": "^7.16.7",
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "babel-loader": "^8.2.3",
+    "core-js": "^3.20.2",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "esm": "^3.2.25",
@@ -15,7 +22,10 @@
     "ip": "^1.1.5",
     "mongoose": "^6.1.5",
     "swagger-jsdoc": "^6.1.0",
-    "swagger-ui-express": "^4.3.0"
+    "swagger-ui-express": "^4.3.0",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.13"

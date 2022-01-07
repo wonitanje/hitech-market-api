@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/images', express.static(path.join('public')))
 app.use('/api/docs', swagger)
 
-app.use('/api/stock', componentsRoutes)
+app.use('/api/components', componentsRoutes)
 
 start()
 
