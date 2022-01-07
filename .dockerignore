@@ -1,5 +1,5 @@
-node_modules
-
-.gitignore
-
 request.rest
+dist
+
+node_modules
+.gitignore
