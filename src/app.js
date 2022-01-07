@@ -13,7 +13,8 @@ const port = process.env.PORT || 3000
 const local = `http://localhost:${port}`
 const remote = `http://${address()}:${port}`
 const corsOptions = {
-  origin: ['http://localhost:8080', 'localhost:3000'],
+  origin: ['http://localhost'],
+  credentials: true,
   optionsSuccessStatus: 200
 }
 
