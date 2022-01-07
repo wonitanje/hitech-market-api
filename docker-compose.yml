@@ -2,7 +2,6 @@ version: '3.9'
 services:
   app:
     build: .
-    image: hitech-market/api
     container_name: hitech-market_api
     depends_on:
       - mongodb
@@ -12,8 +11,6 @@ services:
       NODE_ENV: production
     ports:
       - "8248:${PORT}"
-    networks:
-      - hitech-market
 
   mongodb:
     image: mongo:latest
@@ -27,12 +24,7 @@ services:
       - .env
     ports:
       - "${MONGO_PORT}:${MONGO_PORT}"
-    networks:
-      - hitech-market
 
 volumes:
   app: null
   mongodb: null
-
-networks:
-  hitech-market: null
