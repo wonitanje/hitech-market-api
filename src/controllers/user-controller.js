@@ -66,11 +66,11 @@ class UserController {
     }
   }
 
-  async getUsers(req, res, next) {
+  async getUser(req, res, next) {
     try {
-      const users = await userService.getAllUsers()
+      const user = await userService.getUser(req)
 
-      return res.json(users)
+      return res.json(user)
     } catch (e) {
       next(e)
     }

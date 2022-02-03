@@ -79,8 +79,11 @@ class UserService {
     return { ...tokens, user: userDto }
   }
 
-  async getAllUsers() {
-    return await User.find()
+  async getUser(req) {
+    const email = req.user.email
+    const user = await User.findOne({ email })
+
+    return new UserDto(user)
   }
 }
 
