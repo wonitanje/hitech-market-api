@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+import { Schema, model } from 'mongoose'
 
 const MotherBoard = new Schema({
   brand: String,
@@ -11,6 +11,7 @@ const MotherBoard = new Schema({
   soket: String,
   thermal: Number,
   power: Number,
+  image: String,
 
   cache: {
     L1: Number,
@@ -18,23 +19,23 @@ const MotherBoard = new Schema({
     L3: Number,
   },
 
-  RAM: {
+  ram: {
     capacity: Number,
-    connector: [{
+    connectors: [{
       type: String,
       amount: Number,
     }],
   },
 
-  PCI: [{
+  pci: [{
     connector: String,
     amount: Number,
   }],
 
-  SATA: [{
+  sata: [{
     connector: String,
     amount: Number,
   }],
-})
+}, { versionKey: false })
 
-module.exports = model('MotherBoard', MotherBoard)
+export default model('MotherBoard', MotherBoard)

@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+import { Schema, model } from 'mongoose'
 
 const Fan = new Schema({
   brand: String,
@@ -7,6 +7,7 @@ const Fan = new Schema({
   description: String,
   price: Number,
   size: Number,
+  image: String,
   noise: {
     min: Number,
     max: Number,
@@ -18,6 +19,6 @@ const Fan = new Schema({
   connector: String,
   power: Number,
   sockets: [String],
-})
+}, { versionKey: false })
 
-module.exports = model('Fan', Fan)
+export default model('Fan', Fan)

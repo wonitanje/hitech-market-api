@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+import { Schema, model } from 'mongoose'
 
 const Storage = new Schema({
   brand: String,
@@ -6,11 +6,12 @@ const Storage = new Schema({
   model: String,
   description: String,
   price: Number,
-  socket: String,
+  connector: String,
   size: Number,
   frequency: Number,
   type: String,
-  cache: Number
-})
+  cache: Number,
+  image: String,
+}, { versionKey: false })
 
-module.exports = model('Storage', Storage)
+export default model('Storage', Storage)

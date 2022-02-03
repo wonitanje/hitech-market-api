@@ -1,11 +1,11 @@
-import cpu from './CPU'
-import gpu from './GPU'
-import fan from './Fan'
-import ram from './RAM'
-import body from './Body'
-import storage from './Storage'
-import motherboard from './MotherBoard'
-import powersupply from './PowerSupply'
+import cpu from './cpu-model'
+import gpu from './gpu-model'
+import fan from './fan-model'
+import ram from './ram-model'
+import body from './body-model'
+import storage from './storage-model'
+import motherboard from './motherboard-model'
+import powersupply from './powersupply-model'
 
 export default {
   cpu,

@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const CopyPlugin = require("copy-webpack-plugin");
 const nodeModules = {}
 
 fs.readdirSync(path.resolve(__dirname, 'node_modules'))
@@ -49,8 +50,15 @@ module.exports = {
             }
           }
         ]
-      }
-    ]
+      },
+    ],
   },
-  plugins: []
+
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: "static", to: "static" },
+      ],
+    }),
+  ],
 };

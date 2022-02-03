@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+import { Schema, model } from 'mongoose'
 
 const PowerSupply = new Schema({
   brand: String,
@@ -11,6 +11,7 @@ const PowerSupply = new Schema({
     name: String,
     amount: Number,
   }],
-})
+  image: String,
+}, { versionKey: false })
 
-module.exports = model('PowerSupply', PowerSupply)
+export default model('PowerSupply', PowerSupply)

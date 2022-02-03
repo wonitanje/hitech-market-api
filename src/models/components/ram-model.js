@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+import { Schema, model } from 'mongoose'
 
 const RAM = new Schema({
   brand: String,
@@ -9,6 +9,7 @@ const RAM = new Schema({
   connector: String,
   size: Number,
   frequency: Number,
-})
+  image: String,
+}, { versionKey: false })
 
-module.exports = model('RAM', RAM)
+export default model('RAM', RAM)

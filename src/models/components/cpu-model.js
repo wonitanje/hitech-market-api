@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+import { Schema, model } from 'mongoose'
 
 const CPU = new Schema({
   brand: String,
@@ -10,6 +10,7 @@ const CPU = new Schema({
   threads: Number,
   frequency: Number,
   bitness: Number,
+  image: String,
   cache: {
     L1: Number,
     L2: Number,
@@ -19,6 +20,6 @@ const CPU = new Schema({
   soket: String,
   thermal: Number,
   power: Number,
-})
+}, { versionKey: false })
 
-module.exports = model('CPU', CPU)
+export default model('CPU', CPU)

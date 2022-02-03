@@ -1,12 +1,14 @@
-const { Schema, model } = require('mongoose')
+import { Schema, model } from 'mongoose'
 
 const GPU = new Schema({
   brand: String,
   name: String,
   model: String,
   description: String,
-  chipset: Number,
+  chipset: String,
   price: Number,
+  image: String,
+
   RAM: {
     socket: String,
     size: Number,
@@ -22,6 +24,6 @@ const GPU = new Schema({
     }],
     input: Number,
   },
-})
+}, { versionKey: false })
 
-module.exports = model('GPU', GPU)
+export default model('GPU', GPU)
