@@ -5,15 +5,6 @@ import Object from '../utils/Object'
 
 const router = Router()
 
-/**
- * @swagger
- * /api/stock/:
- *  get:
- *    description: Get entries from stock tables
- *    responses:
- *      200:
- *        description: Object of components tables
- */
 router.get('/', async (req, res, next) => {
   const entries = Object.entriesArray(Components)
 
@@ -27,20 +18,6 @@ router.get('/', async (req, res, next) => {
   next(false)
 })
 
-/**
- * @swagger
- * /api/stock/:component:
- *  get:
- *    description: Get entries from stock table
- *    parameters:
- *      - component: component name
- *        in: path
- *        required: true
- *        type: string
- *    responses:
- *      200:
- *        description: An array of components
- */
 router.get('/:component', async (req, res, next) => {
   const { component } = req.params
 
@@ -52,25 +29,6 @@ router.get('/:component', async (req, res, next) => {
   next(false)
 })
 
-/**
- * @swagger
- * /api/stock/:component:
- *  post:
- *    description: Create new component
- *    produces:
- *      - application/json
- *    parameters:
- *      - :component: component name
- *        in: path
- *        required: true
- *        type: string
- *      - specs: specs of component
- *        in: body
- *        type: object
- *    responses:
- *      201:
- *        description: Component created 
- */
 router.post('/:component', async (req, res, next) => {
   const body = req.body
   const { component } = req.params
@@ -85,42 +43,6 @@ router.post('/:component', async (req, res, next) => {
   next(false)
 })
 
-/**
- * @swagger
- * /api/stock/compatibility:
- *  get:
- *    description: Check components compatibility
- *    produces:
- *      - application/json
- *    parameters:
- *      - :componentName: Array of objects assign to [{ id - 1, amount - 1 }]
- *        in: body
- *        required: false
- *        type: object
- *        properties:
- *          _id:
- *            type: string
- *            description: The auto-generated id
- *          brand:
- *            type: string
- *          name:
- *            type: string
- *          description:
- *            type: string
- *          price:
- *            type: number
- *          formFactor:
- *            type: string
- *    responses:
- *      200:
- *        description: Component created
- *      400:
- *        description: Object in array doesn't have id field
- *      404:
- *        description: ComponentName with this id not found
- *      422:
- *        description: Table of any componentName not found
- */
 router.get('/compatibility', async (req, res, next) => {
   const components = {}
   const errors = {}
