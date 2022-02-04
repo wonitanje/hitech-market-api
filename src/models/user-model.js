@@ -24,6 +24,10 @@ const User = new Schema({
   },
   activationLink: {
     type: String
+  },
+  role: {
+    type: Number,
+    default: 0
   }
 })
 

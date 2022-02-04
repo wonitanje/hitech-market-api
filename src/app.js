@@ -8,6 +8,7 @@ import mongoose from 'mongoose'
 import { address } from 'ip'
 import router from './routers'
 import errorMiddleware from './middlewares/error-middleware'
+import logMiddleware from './middlewares/log-middleware'
 
 const port = process.env.PORT || 3000
 const local = `http://localhost:${port}`
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/images', express.static(path.join('static')))
 app.use('/api', router)
 app.use(errorMiddleware)
+app.use(logMiddleware)
 
 start()
 

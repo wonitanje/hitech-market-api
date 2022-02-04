@@ -19,7 +19,7 @@ export default function (req, res, next) {
     }
 
     req.user = userData
-    next()
+    next(false)
   } catch (e) {
     return next(ApiError.UnauthorizedError())
   }

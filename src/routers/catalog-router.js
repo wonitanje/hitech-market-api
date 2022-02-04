@@ -3,7 +3,7 @@ import Catalog from '../models/catalog-model'
 
 const router = Router()
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   const catalog = await Catalog.findOne({
     attributes: { exclude: ['_id', '__v'] }
   }).select(['-_id', '-__v'])
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
   res.send(catalog)
 })
 
-router.get('/init', async (req, res) => {
+router.get('/init', async (req, res, next) => {
   const data = {
     "cpu": {
       "name": "Процессор",

@@ -7,12 +7,14 @@ import UserDto from '../dtos/user-dto'
 import ApiError from '../exceptions/api-error.js'
 
 class UserService {
+  salt = process.env.SALT
+
   async registration(name, phone, email, password) {
     const candidate = await User.findOne({ email })
     if (candidate) {
       throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} уже существует`)
     }
-    const hashPassword = await bcrypt.hash(password, 3)
+    const hashPassword = await bcrypt.hash(password, salt)
     const activationLink = uuid.v4()
 
     const user = new User({ name, phone, email, password: hashPassword, activationLink })

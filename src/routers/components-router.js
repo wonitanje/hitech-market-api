@@ -14,7 +14,7 @@ const router = Router()
  *      200:
  *        description: Object of components tables
  */
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   const entries = Object.entriesArray(Components)
 
   const result = {}
@@ -24,6 +24,7 @@ router.get('/', async (req, res) => {
   }
 
   res.status(200).send(result)
+  next(false)
 })
 
 /**
@@ -40,7 +41,7 @@ router.get('/', async (req, res) => {
  *      200:
  *        description: An array of components
  */
-router.get('/:component', async (req, res) => {
+router.get('/:component', async (req, res, next) => {
   const { component } = req.params
 
   if (Components[component] == null) return res.status(404).send('Комплектующий не найден')
@@ -48,6 +49,7 @@ router.get('/:component', async (req, res) => {
   const stock = await Components[component]?.find({})
 
   res.status(200).send(stock)
+  next(false)
 })
 
 /**
@@ -69,7 +71,7 @@ router.get('/:component', async (req, res) => {
  *      201:
  *        description: Component created 
  */
-router.post('/:component', async (req, res) => {
+router.post('/:component', async (req, res, next) => {
   const body = req.body
   const { component } = req.params
 
@@ -80,6 +82,7 @@ router.post('/:component', async (req, res) => {
 
   res.statusMessage = 'Success'
   res.sendStatus(201)
+  next(false)
 })
 
 /**
@@ -118,7 +121,7 @@ router.post('/:component', async (req, res) => {
  *      422:
  *        description: Table of any componentName not found
  */
-router.get('/compatibility', async (req, res) => {
+router.get('/compatibility', async (req, res, next) => {
   const components = {}
   const errors = {}
 
@@ -178,6 +181,14 @@ router.get('/compatibility', async (req, res) => {
       })
     }
   }
+
+  console.log(errors)
+  if (errors) {
+    return next(errors)
+  }
+
+  res.sendStatus(200)
+  next(false)
 })
 
 export default router

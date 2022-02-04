@@ -6,13 +6,13 @@ import Object from '../utils/Object'
 const router = express.Router()
 const Models = Components
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   const entries = Object.entriesArray(Models).map(([key, value]) => [key, Object.keys(value.schema.paths)])
 
   res.status(200).send(Object.fromEntries(entries))
 })
 
-router.get('/:model', async (req, res) => {
+router.get('/:model', async (req, res, next) => {
   const { model } = req.params
 
   if (Models[model] == null) return res.status(404).send('Комплектующий не найден')
@@ -21,7 +21,7 @@ router.get('/:model', async (req, res) => {
 
   res.status(200).send(stock)
 })
-// router.get('/:model', async (req, res) => {
+// router.get('/:model', async (req, res, next) => {
 //   const modelName = req.params.model
 
 //   if (Models[modelName] == null)
@@ -37,7 +37,7 @@ router.get('/:model', async (req, res) => {
 //   res.send(instances)
 // })
 
-router.get('/:primaryKey', async (req, res) => {
+router.get('/:primaryKey', async (req, res, next) => {
   const modelName = req.params.model
   const primaryKey = (req.params.primaryKey !== 'null') ? req.params.primaryKey : null
 
@@ -57,7 +57,7 @@ router.get('/:primaryKey', async (req, res) => {
   res.send(instance)
 })
 
-router.get('/:value/:key', async (req, res) => {
+router.get('/:value/:key', async (req, res, next) => {
   const { model } = req.params
   const value = (req.params.value !== 'null') ? req.params.value : null
   const key = req.params.key
@@ -77,7 +77,7 @@ router.get('/:value/:key', async (req, res) => {
   res.send(instances)
 })
 
-router.post('/:model', async (req, res) => {
+router.post('/:model', async (req, res, next) => {
   const item = req.body
   delete item._id
   const { model } = req.params
@@ -113,7 +113,7 @@ router.post('/:model', async (req, res) => {
   res.status(201).send(instance)
 })
 
-router.put('/:primaryKey', async (req, res) => {
+router.put('/:primaryKey', async (req, res, next) => {
   const { model } = req.params
   const id = req.params.primaryKey
   const item = req.body
@@ -135,7 +135,7 @@ router.put('/:primaryKey', async (req, res) => {
   res.send(item)
 })
 
-router.delete('/:model/:primaryKey', async (req, res) => {
+router.delete('/:model/:primaryKey', async (req, res, next) => {
   const { model } = req.params
   const primaryKey = req.params.primaryKey
 
