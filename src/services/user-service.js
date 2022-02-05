@@ -25,7 +25,7 @@ class UserService {
     const tokens = tokenService.generateTokens({ ...userDto })
     await tokenService.saveToken(userDto.id, tokens.refreshToken)
 
-    return { ...tokens, user: userDto }
+    return { accessToken: tokens.accessToken, user: userDto }
   }
 
   async activate(activationLink) {
@@ -53,7 +53,7 @@ class UserService {
 
     await tokenService.saveToken(userDto.id, tokens.refreshToken)
 
-    return { ...tokens, user: userDto }
+    return { accessToken: tokens.accessToken, user: userDto }
   }
 
   async logout(refreshToken) {
@@ -74,11 +74,11 @@ class UserService {
 
     const user = await User.findById(userData.id)
     const userDto = new UserDto(user)
-    const tokens = tokenService.generateTokens({ ...userDto })
+    const tokens = tokenService.generateTokens({ email: userDto.email })
 
     await tokenService.saveToken(userDto.id, tokens.refreshToken)
 
-    return { ...tokens, user: userDto }
+    return { accessToken: tokens.accessToken, user: userDto }
   }
 
   async getUser(req) {

@@ -17,7 +17,9 @@ router.get('/', async (req, res, next) => {
 router.get('/:model', async (req, res, next) => {
   const { model } = req.params
 
-  if (Models[model] == null) return res.status(404).send('Комплектующий не найден')
+  if (Models[model] == null) {
+    return next(ApiError.NotFound('Комплектующий не найден'))
+  }
 
   const stock = await Models[model]?.find({})
 
@@ -25,27 +27,27 @@ router.get('/:model', async (req, res, next) => {
   next(false)
 })
 
-router.get('/:primaryKey', async (req, res, next) => {
-  const modelName = req.params.model
-  const primaryKey = (req.params.primaryKey !== 'null') ? req.params.primaryKey : null
+// router.get('/:primaryKey', async (req, res, next) => {
+//   const modelName = req.params.model
+//   const primaryKey = (req.params.primaryKey !== 'null') ? req.params.primaryKey : null
 
-  if (Models[modelName] == null)
-    return next(ApiError.NotFound())
+//   if (Models[modelName] == null)
+//     return next(ApiError.NotFound())
 
-  try {
-    var instance = await Models[modelName].findById(primaryKey, {
-      attributes: { exclude: ['createdAt', 'updatedAt'] }
-    })
-  } catch (e) {
-    return next(e)
-  }
-  if (instance == null) {
-    return next(ApiError.BadRequest())
-  }
+//   try {
+//     var instance = await Models[modelName].findById(primaryKey, {
+//       attributes: { exclude: ['createdAt', 'updatedAt'] }
+//     })
+//   } catch (e) {
+//     return next(e)
+//   }
+//   if (instance == null) {
+//     return next(ApiError.BadRequest())
+//   }
 
-  res.send(instance)
-  next(false)
-})
+//   res.send(instance)
+//   next(false)
+// })
 
 router.get('/:value/:key', async (req, res, next) => {
   const { model } = req.params
@@ -85,14 +87,14 @@ router.post('/:model', async (req, res, next) => {
     const options = Object.fromEntries(entries)
 
     const count = await Models[model].count({ where: options })
-    if (count > 0)
-      return next(ApiError.NotFound())
+    if (count > 0) {
+      return next(ApiError.BadRequest())
+    }
   }
 
   try {
     var id = await Models[model].create(item)
       .then(({ _id }) => _id)
-      .catch((err) => console.warn(err))
   } catch (e) {
     return next(e)
   }
@@ -118,6 +120,7 @@ router.put('/:primaryKey', async (req, res, next) => {
   } catch (e) {
     return next(e)
   }
+
   if (instance == null)
     return next(ApiError.NotFound())
 

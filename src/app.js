@@ -14,9 +14,11 @@ const port = process.env.PORT || 3000
 const local = `http://localhost:${port}`
 const remote = `http://${address()}:${port}`
 const corsOptions = {
-  origin: ['http://localhost', 'http://localhost:8080', 'http://192.168.3.28:8080', 'http://192.168.3.23:8080'],
+  // origin: ['http://localhost', 'http://localhost:8080', 'http://192.168.3.28:8080', 'http://192.168.3.23:8080'],
+  origin: true,
   credentials: true,
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  exposedHeaders: ['set-cookie']
 }
 
 const app = express()

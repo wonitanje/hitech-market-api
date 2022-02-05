@@ -18,7 +18,9 @@ const Fan = new Schema({
   },
   connector: String,
   power: Number,
-  sockets: [String],
+  sockets: {
+    type: [String],
+  },
 }, { versionKey: false })
 
 export default model('Fan', Fan)

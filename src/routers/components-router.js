@@ -1,5 +1,7 @@
 import { Router } from 'express'
 import Components from '../models/components'
+import ApiError from '../exceptions/api-error'
+import ComponentDto from '../dtos/components-dto'
 
 import Object from '../utils/Object'
 
@@ -23,7 +25,29 @@ router.get('/:component', async (req, res, next) => {
 
   if (Components[component] == null) return res.status(404).send('Комплектующий не найден')
 
-  const stock = await Components[component]?.find({})
+  const stock = (await Components[component]?.find({}))?.map((el) => {
+    if (el.image) el.image = `http://${req.headers.host}/images/${el.image}`
+
+    return el
+  })
+
+  res.status(200).send(stock)
+  next(false)
+})
+
+router.get('/:component/:id', async (req, res, next) => {
+  const { component, id } = req.params
+
+  if (Components[component] == null) {
+    return next(ApiError.NotFound('Комплектующий не найден'))
+  }
+
+  const stock = (await Components[component]?.findById(id))
+  if (stock == null) {
+    return next(ApiError.NotFound('Комплектующий не найден'))
+  }
+
+  stock.image = `http://${req.headers.host}/images/${stock.image}`
 
   res.status(200).send(stock)
   next(false)
@@ -33,12 +57,15 @@ router.post('/:component', async (req, res, next) => {
   const body = req.body
   const { component } = req.params
 
-  if (Components[component] == null) return res.status(400)
+  if (Components[component] == null) {
+    return next(ApiError.NotFound())
+  }
 
-  const stock = new Components[component](body)
+  const dto = new ComponentDto(component, body)
+
+  const stock = new Components[component](dto)
   await stock.save()
 
-  res.statusMessage = 'Success'
   res.sendStatus(201)
   next(false)
 })
@@ -104,7 +131,6 @@ router.get('/compatibility', async (req, res, next) => {
     }
   }
 
-  console.log(errors)
   if (errors) {
     return next(errors)
   }

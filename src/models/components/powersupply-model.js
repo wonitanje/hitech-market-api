@@ -7,10 +7,13 @@ const PowerSupply = new Schema({
   description: String,
   price: Number,
   power: Number,
-  connectors: [{
-    name: String,
-    amount: Number,
-  }],
+  connectors: {
+    type: [{
+      name: String,
+      amount: Number,
+    }],
+    default: [],
+  },
   image: String,
 }, { versionKey: false })
 

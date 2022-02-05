@@ -18,10 +18,13 @@ const GPU = new Schema({
   connector: String,
   thermal: Number,
   power: {
-    connectors: [{
-      type: String,
-      amount: Number,
-    }],
+    connectors: {
+      type: [{
+        type: String,
+        amount: Number,
+      }],
+      default: [],
+    },
     input: Number,
   },
 }, { versionKey: false })

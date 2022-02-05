@@ -7,6 +7,7 @@ const router = new Router()
 
 router.post('/register',
   body('email').isEmail(),
+  body('phone').isMobilePhone(),
   body('password').isLength({ min: 3, max: 32 }),
   userController.registration
 )

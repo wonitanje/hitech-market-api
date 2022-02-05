@@ -27,15 +27,21 @@ const MotherBoard = new Schema({
     }],
   },
 
-  pci: [{
-    connector: String,
-    amount: Number,
-  }],
+  pci: {
+    type: [{
+      connector: String,
+      amount: Number,
+    }],
+    default: [],
+  },
 
-  sata: [{
-    connector: String,
-    amount: Number,
-  }],
+  sata: {
+    type: [{
+      connector: String,
+      amount: Number,
+    }],
+    default: [],
+  },
 }, { versionKey: false })
 
 export default model('MotherBoard', MotherBoard)
