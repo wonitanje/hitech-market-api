@@ -6,7 +6,7 @@ const Fan = new Schema({
   model: String,
   description: String,
   price: Number,
-  size: Number,
+  size: String,
   image: String,
   noise: {
     min: Number,
